@@ -16,8 +16,7 @@ const login = credentials => {
     var error = null;
     if (!credentials.email || !credentials.password) {
         error = ERROR_EMPTY;
-    }
-    if (credentials.email != email || credentials.password != password) {
+    } else if (credentials.email !== email || credentials.password !== password) {
         error = ERROR_WRONG;
     }
 

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import {
+    Redirect,
+    withRouter
+} from 'react-router-dom';
+import login from '../actions';
+import ErrorMsg from '../components/error-msg';
 
 class Login extends Component {
 
@@ -16,20 +21,36 @@ class Login extends Component {
         this._onchangePassword = this._onchangePassword.bind(this);
     }
 
+    componentDidMount() {
+        document.title = 'Login';
+    }
+
     render() {
         if (this.props.loggedIn) return <Redirect push to="/" />
         return (
             <div>
                 <input
                     type="text"
+                    placeholder="Email"
                     value={this.state.email}
                     onChange={this._onChangeEmail}
                 />
                 <input
                     type="password"
+                    placeholder="Password"
                     value={this.state.password}
                     onChange={this._onchangePassword}
                 />
+                <button onClick={() => {
+                    var credentials = {
+                        email: this.state.email,
+                        password: this.state.password
+                    };
+                    this.props._login(credentials);
+                }}>
+                LOG IN
+                </button>
+                <ErrorMsg error={this.props.error} />
             </div>
         );
     }
@@ -47,14 +68,25 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        loggedIn: state.app.user.loggedIn
+        loggedIn: state.user.loggedIn,
+        email: state.user.email,
+        error: state.user.error
     }
 };
 
-Login = connect(
-    mapStateToProps
-)(Login);
+const mapDispatchToProps = dispatch => {
+    return {
+        _login: credentials => {
+            dispatch(login(credentials))
+        }
+    }
+}
+
+Login = withRouter(connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Login));
 
 export default Login;

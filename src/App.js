@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
+	Switch,
 	Redirect,
 	Route,
-	Link
+	Link,
+	withRouter
 } from 'react-router-dom';
 
 import Home from './containers/home';
@@ -18,40 +20,37 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 			) : (
 				<Redirect push to='/login' />
 			)
-		) }
-	/>
+	)}/>
 );
 
 let App = ({ loggedIn, email }) => (
 	<div className="content">
 		<div className="top-right links">
 			{/* 由于只能返回单个node，所以暂时拆开来写 */}
-			{ !loggedIn ? 
-				(
-					<Link to="/login">Login</Link>
-				) : (
-					<Link to="/">Home</Link>
-				)
+			{ loggedIn &&
+				<Link to="/">Home</Link>
 			}
 			{ loggedIn &&
 				<Link to="#">{email}</Link>
 			}
 		</div>
-		<PrivateRoute exact path="/" component={Home} />
-		<Route path="/login" component={Login} />
+		<Switch>
+			<PrivateRoute exact path="/" component={Home} />
+			<Route exact path="/login" component={Login} />
+		</Switch>
 	</div>
 );
 
-const mapStateToProps = (state) => {
-	loggedIn = state.app.user.loggedIn;
+const mapStateToProps = state => {
+	loggedIn = state.user.loggedIn;
 	return {
-		loggedIn: state.app.user.loggedIn,
-		email: state.app.user.email
+		loggedIn: state.user.loggedIn,
+		email: state.user.email
 	};
 }
 
-App = connect(
+App = withRouter(connect(
 	mapStateToProps
-)(App);
+)(App));
 
 export default App;

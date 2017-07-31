@@ -13,11 +13,13 @@ const user = (state = initialState, action) => {
     switch (action.type) {
         case USER_LOGIN:
             return Object.assign({}, state, {
+                loggedIn: true,
                 email: action.email,
                 error: null
             });
         case USER_ERROR:
             return Object.assign({}, state, {
+                loggedIn: false,
                 email: null,
                 error: action.error
             });
