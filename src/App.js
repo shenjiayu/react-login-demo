@@ -25,15 +25,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 
 let App = ({ loggedIn, email }) => (
 	<div className="content">
-		<div className="top-right links">
-			{/* 由于只能返回单个node，所以暂时拆开来写 */}
 			{ loggedIn &&
-				<Link to="/">Home</Link>
+				<div className="top-right links">
+					<Link to="/">Home</Link>
+					<Link to="#">{email}</Link>
+				</div>
 			}
-			{ loggedIn &&
-				<Link to="#">{email}</Link>
-			}
-		</div>
 		<Switch>
 			<PrivateRoute exact path="/" component={Home} />
 			<Route exact path="/login" component={Login} />
