@@ -17,8 +17,7 @@ class Login extends Component {
             password: ''
         };
 
-        this._onChangeEmail = this._onChangeEmail.bind(this);
-        this._onchangePassword = this._onchangePassword.bind(this);
+        this.onChangeValue = this.onChangeValue.bind(this);
     }
 
     componentDidMount() {
@@ -30,16 +29,18 @@ class Login extends Component {
         return (
             <div>
                 <input
+                    name="email"
                     type="text"
                     placeholder="Email"
                     value={this.state.email}
-                    onChange={this._onChangeEmail}
+                    onChange={this.onChangeValue}
                 />
                 <input
+                    name="password"
                     type="password"
                     placeholder="Password"
                     value={this.state.password}
-                    onChange={this._onchangePassword}
+                    onChange={this.onChangeValue}
                 />
                 <button onClick={() => {
                     var credentials = {
@@ -55,15 +56,10 @@ class Login extends Component {
         );
     }
 
-    _onChangeEmail(e) {
+    onChangeValue(event) {
+        const { name, value } = event.target;
         this.setState({
-            email: e.target.value
-        });
-    }
-
-    _onchangePassword(e) {
-        this.setState({
-            password: e.target.value
+            [name]: value
         });
     }
 }
