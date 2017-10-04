@@ -14,11 +14,11 @@ const history = createHistory();
 const store = createStore(app);
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history}>
-            <App />
-        </Router>
-    </Provider>,
-    document.getElementById('root')
+	<Provider store={store}>
+		<Router history={history}>
+			<App />
+		</Router>
+	</Provider>,
+	document.getElementById('root')
 );
 registerServiceWorker();

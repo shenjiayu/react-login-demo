@@ -4,27 +4,27 @@ import { withRouter } from 'react-router-dom';
 
 class Home extends Component {
 
-    componentDidMount() {
-        document.title = 'Home';
-    }
+	componentDidMount() {
+		document.title = 'Home';
+	}
 
-    render () {
-        return (
-            <div className="title m-b-md">
-                React
-            </div>
-        );
-    }
+	render () {
+		return (
+			<div className="title m-b-md">
+					React
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = state => {
-    return {
-        loggedIn: state.user.loggedIn
-    };
+	return {
+		loggedIn: state.user.loggedIn
+	};
 }
 
 Home = withRouter(connect(
-    mapStateToProps
+  mapStateToProps
 )(Home));
 
 export default Home;

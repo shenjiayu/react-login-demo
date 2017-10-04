@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import user from './user';
 
 const app = combineReducers({
-    user
+	user
 });
 
 export default app;

@@ -1,6 +1,7 @@
 import {
-    USER_LOGIN,
-    USER_ERROR
+	USER_LOGIN,
+	USER_LOGOUT,
+	USER_ERROR
 } from './actionTypes';
 
 // Const Error
@@ -13,26 +14,36 @@ const email = 'demo@demo.com';
 const password = '123456';
 
 const login = credentials => {
-    var error = null;
-    if (!credentials.email || !credentials.password) {
-        error = ERROR_EMPTY;
-    } else if (credentials.email !== email || credentials.password !== password) {
-        error = ERROR_WRONG;
-    }
+	var error = null;
+	if (!credentials.email || !credentials.password) {
+		error = ERROR_EMPTY;
+	} else if (credentials.email !== email || credentials.password !== password) {
+		error = ERROR_WRONG;
+	}
 
-    if (error != null) {
-        return {
-            type: USER_ERROR,
-            error: error
-        };
-    }
+	if (error != null) {
+		return {
+			type: USER_ERROR,
+			error: error
+		};
+	}
 
-    localStorage.setItem('token', token);
-    localStorage.setItem('email', credentials.email);
-    return {
-        type: USER_LOGIN,
-        email: credentials.email
-    };
+	localStorage.setItem('token', token);
+	localStorage.setItem('email', credentials.email);
+	return {
+		type: USER_LOGIN,
+		email: credentials.email
+	};
 };
 
-export default login;
+const logout = () => {
+	localStorage.clear();
+	return {
+		type: USER_LOGOUT
+	};
+};
+
+export default {
+	login,
+	logout
+}
