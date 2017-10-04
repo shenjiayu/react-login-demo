@@ -11,7 +11,7 @@ class Home extends Component {
 	render () {
 		return (
 			<div className="title m-b-md">
-					React
+					Home
 			</div>
 		);
 	}
