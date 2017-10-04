@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import createHistory from 'history/createBrowserHistory'
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import app from './reducers';
 
 const history = createHistory();
