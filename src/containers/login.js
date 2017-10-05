@@ -25,7 +25,7 @@ class Login extends Component {
 	}
 
 	render() {
-		if (this.props.loggedIn) return <Redirect push to="/" />
+		if (this.props.loggedIn) return <Redirect push to="/" />;
 		return (
 			<div>
 				<input
@@ -69,7 +69,7 @@ const mapStateToProps = state => {
 		loggedIn: state.user.loggedIn,
 		email: state.user.email,
 		error: state.user.error
-	}
+	};
 };
 
 const mapDispatchToProps = dispatch => {
@@ -77,8 +77,8 @@ const mapDispatchToProps = dispatch => {
 		_login: credentials => {
 			dispatch(action.login(credentials));
 		}
-	}
-}
+	};
+};
 
 Login = withRouter(connect(
 	mapStateToProps,

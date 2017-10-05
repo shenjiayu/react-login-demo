@@ -5,7 +5,7 @@ import {
 } from './actionTypes';
 
 // Const Error
-const ERROR_EMPTY = "Both email and password must be filled.";
+const ERROR_EMPTY = 'Both email and password must be filled.';
 const ERROR_WRONG = 'Email or password is wrong.';
 
 // Mockup data for login demo
@@ -46,4 +46,4 @@ const logout = () => {
 export default {
 	login,
 	logout
-}
+};

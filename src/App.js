@@ -18,27 +18,27 @@ let loggedIn = false;
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
 	<Route {...rest} render={ props => (
-			loggedIn ? (
-				<Component {...props} />
-			) : (
-				<Redirect push to='/login' />
-			)
+		loggedIn ? (
+			<Component {...props} />
+		) : (
+			<Redirect push to='/login' />
+		)
 	)}/>
 );
 
 let App = ({ loggedIn, email, _logout }) => (
 	<div className="content">
-			{ loggedIn &&
-				<div className="top-right links">
-					<Link to="/">Home</Link>
-					<Link to="/profile">Profile</Link>
-					<Link to="#">{email}</Link>
-					<Link to="#" onClick={(e) => {
-						e.preventDefault();
-						_logout();
-					}}>Logout</Link>
-				</div>
-			}
+		{ loggedIn &&
+			<div className="top-right links">
+				<Link to="/">Home</Link>
+				<Link to="/profile">Profile</Link>
+				<Link to="#">{email}</Link>
+				<Link to="#" onClick={(e) => {
+					e.preventDefault();
+					_logout();
+				}}>Logout</Link>
+			</div>
+		}
 		<Switch>
 			<PrivateRoute exact path="/" component={Home} />
 			<PrivateRoute exact path="/profile" component={Profile} />
@@ -57,11 +57,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-			_logout: () => {
-					dispatch(action.logout());
-			}
-	}
-}
+		_logout: () => {
+			dispatch(action.logout());
+		}
+	};
+};
 
 App = withRouter(connect(
 	mapStateToProps,

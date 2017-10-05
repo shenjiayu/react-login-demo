@@ -21,10 +21,10 @@ const mapStateToProps = state => {
 	return {
 		loggedIn: state.user.loggedIn
 	};
-}
+};
 
 Home = withRouter(connect(
-  mapStateToProps
+	mapStateToProps
 )(Home));
 
 export default Home;
