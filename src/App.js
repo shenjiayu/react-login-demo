@@ -8,6 +8,7 @@ import {
 	withRouter
 } from 'react-router-dom';
 
+import ErrorHandler from './components/error-handler';
 import Home from './containers/Home';
 import Profile from './containers/Profile';
 import Login from './containers/Login';
@@ -26,6 +27,27 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 	)}/>
 );
 
+const routes = [
+	{
+		protected: true,
+		exact: true,
+		path: '/',
+		component: Home
+	},
+	{
+		protected: true,
+		exact: true,
+		path: '/profile',
+		component: Profile
+	},
+	{
+		protected: false,
+		exact: true,
+		path: '/login',
+		component: Login
+	}
+];
+
 let App = ({ loggedIn, email, _logout }) => (
 	<div className="content">
 		{ loggedIn &&
@@ -39,11 +61,15 @@ let App = ({ loggedIn, email, _logout }) => (
 				}}>Logout</Link>
 			</div>
 		}
-		<Switch>
-			<PrivateRoute exact path="/" component={Home} />
-			<PrivateRoute exact path="/profile" component={Profile} />
-			<Route exact path="/login" component={Login} />
-		</Switch>
+		<ErrorHandler>
+			<Switch>
+				{
+					routes.map((route, iterator) => {
+						return route.protected ? <PrivateRoute key={iterator} {...route} /> : <Route key={iterator} {...route} />;
+					})
+				}
+			</Switch>
+		</ErrorHandler>
 	</div>
 );
 
